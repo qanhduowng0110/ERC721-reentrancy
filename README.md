@@ -11,3 +11,7 @@ tại đây hàm fallback gọi tiếp hàm withdraw để rút hết tiền vì
 tại function mint() của nạn nhân sẽ gọi function _safeMint() trước khi cập nhật biến trạng thái alreadyMinted[msg.sender] = true;
 trong function _safeMint() sẽ gọi tiếp đến hàm function onERC721Received của msg.sender để thực hiện logic tại contract của msg,sender
 Hacker có thể lợi dụng điều này để gọi liên tiếp hàm mint() của nạn nhân để mint bất kì số lượng NFT nào.
+
+#Để ngăn ngừa lỗi này
+Cần phải cập nhật biến trạng thái trước khi thực thi logic hàm (tiên quyết)
+Thêm modifier nonReentrancy ở trong với những function có thể gây ra lỗi reentrancy.
