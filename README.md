@@ -7,3 +7,7 @@ tại đây .call được gọi trước khi biến số dư được cập nh�
 khi .call được gọi thì hàm fallback của contract được .call gọi sẽ được thực thi
 tại đây hàm fallback gọi tiếp hàm withdraw để rút hết tiền vì khi này số dư của kẻ tấn công chưa được cập nhật
 
+# Ví dụ phức tạp hơn tại contracts2 là về ERC721
+tại function mint() của nạn nhân sẽ gọi function _safeMint() trước khi cập nhật biến trạng thái alreadyMinted[msg.sender] = true;
+trong function _safeMint() sẽ gọi tiếp đến hàm function onERC721Received của msg.sender để thực hiện logic tại contract của msg,sender
+Hacker có thể lợi dụng điều này để gọi liên tiếp hàm mint() của nạn nhân để mint bất kì số lượng NFT nào.
